@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe - Player vs AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 4px;
+            margin: 20px auto;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            font-size: 24px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        #scoreboard {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe - Player vs AI</h1>
+    <div id="scoreboard">
+        <p>Score:</p>
+        <p>Player (X): <span id="playerWins">0</span></p>
+        <p>Somone else (O): <span id="aiWins">0</span></p>
+    </div>
+    <div class="board" id="board"></div>
+    <script>
+        const board = document.getElementById('board');
+        const playerWinsDisplay = document.getElementById('playerWins');
+        const aiWinsDisplay = document.getElementById('aiWins');
+        let currentPlayer = 'X';
+        const cells = Array(9).fill(null);
+        let gameOver = false;
+        let playerWins = 0;
+        let aiWins = 0;
+
+        // Create the Tic Tac Toe board
+        for (let i = 0; i < 9; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.dataset.index = i;
+            cell.addEventListener('click', handleCellClick);
+            board.appendChild(cell);
+        }
+
+        function handleCellClick(event) {
+            if (gameOver) return;
+            
+            const index = event.target.dataset.index;
+
+            if (cells[index] === null) {
+                cells[index] = currentPlayer;
+                event.target.textContent = currentPlayer;
+
+                if (checkWinner(currentPlayer)) {
+                    setTimeout(() => {
+                        if (currentPlayer === 'X') {
+                            playerWins++;
+                            playerWinsDisplay.textContent = playerWins;
+                        } else {
+                            aiWins++;
+                            aiWinsDisplay.textContent = aiWins;
+                        }
+                        alert(`Player ${currentPlayer} wins!`);
+                        resetGame();
+                    }, 100);
+                } else if (cells.every(cell => cell !== null)) {
+                    setTimeout(() => {
+                        alert("It's a draw!");
+                        resetGame();
+                    }, 100);
+                } else {
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    makeAIMove();
+                }
+            }
+        }
+
+        function checkWinner(player) {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            for (const combo of winningCombinations) {
+                const [a, b, c] = combo;
+                if (cells[a] === player && cells[b] === player && cells[c] === player) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function makeAIMove() {
+            if (gameOver) return;
+
+            // Simple AI: Randomly select an empty cell
+            const emptyCells = cells.reduce((acc, cell, index) => {
+                if (cell === null) {
+                    acc.push(index);
+                }
+                return acc;
+            }, []);
+
+            if (emptyCells.length > 0) {
+                const randomIndex = Math.floor(Math.random() * emptyCells.length);
+                const aiMoveIndex = emptyCells[randomIndex];
+
+                setTimeout(() => {
+                    cells[aiMoveIndex] = currentPlayer;
+                    const aiCell = document.querySelector(`[data-index="${aiMoveIndex}"]`);
+                    aiCell.textContent = currentPlayer;
+
+                    if (checkWinner(currentPlayer)) {
+                        setTimeout(() => {
+                            if (currentPlayer === 'X') {
+                                playerWins++;
+                                playerWinsDisplay.textContent = playerWins;
+                            } else {
+                                aiWins++;
+                                aiWinsDisplay.textContent = aiWins;
+                            }
+                            alert("AI wins!");
+                            resetGame();
+                        }, 100);
+                    } else if (cells.every(cell => cell !== null)) {
+                        setTimeout(() => {
+                            alert("It's a draw!");
+                            resetGame();
+                        }, 100);
+                    } else {
+                        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    }
+                }, 500); // Delay AI move for half a second
+            }
+        }
+
+        function resetGame() {
+            cells.fill(null);
+            currentPlayer = 'X';
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.textContent = '';
+            });
+            gameOver = false;
+        }
+    </script>
+</body>
+</html>
