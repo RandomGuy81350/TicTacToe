@@ -70,6 +70,18 @@
         <input type="radio" id="q3b" name="q3" value="B">
         <label for="q3b">B. False</label><br>
      </div>
+    <!-- Question 4 -->
+    <div class="question">
+        <p>Q4. If 2(sinA -cosec30°)=-3, A=?</p>
+        <input type="radio" id="q4a" name="q4" value="A">
+        <label for="q4a">A. 45°.</label><br>
+        <input type="radio" id="q4b" name="q4" value="B">
+        <label for="q4b">B. 30°.</label><br>
+        <input type="radio" id="q4c" name="q4" value="C">
+        <label for="q4c">C. 60°.</label><br>
+        <input type="radio" id="q4d" name="q4" value="D">
+        <label for="q4d">D. 90°.</label><br>
+    </div>
 
     <!-- Submit button and result display -->
     <button id="submitBtn" onclick="checkAnswers()">Submit</button>
@@ -87,7 +99,8 @@
             const correctAnswers = {
                 q1: "B", // Correct answer for Question 1
                 q2: "C",
-                q3: "A"  // Correct answer for Question 2
+                q3: "A",
+                q4: "B"// Correct answer for Question 2
             };
 
             // Retrieve user's answers and calculate the score
@@ -95,6 +108,7 @@
             const userAnswerQ1 = document.querySelector('input[name="q1"]:checked');
             const userAnswerQ2 = document.querySelector('input[name="q2"]:checked');
             const userAnswerQ3 = document.querySelector('input[name="q3"]:checked');
+            const userAnswerQ4 = document.querySelector('input[name="q4"]:checked');
 
             if (userAnswerQ1 && userAnswerQ1.value === correctAnswers.q1) {
                 score++;
@@ -105,9 +119,12 @@
             if (userAnswerQ3 && userAnswerQ3.value === correctAnswers.q3) {
                 score++;
             }
+            if (userAnswerQ4 && userAnswerQ4.value === correctAnswers.q4) {
+                score++;
+            }
 
             // Display result
-            document.getElementById("result").innerText = `You got ${score} out of 3 correct.`;
+            document.getElementById("result").innerText = `You got ${score} out of 4 correct.`;
 
             // Hide submit button and show retry and show answers links
             document.getElementById("submitBtn").style.display = "none";
@@ -138,11 +155,13 @@
             const correctAnswerQ1 = document.querySelector('label[for="q1b"]');
             const correctAnswerQ2 = document.querySelector('label[for="q2c"]');
             const correctAnswerQ3 = document.querySelector('label[for="q3a"]');
+            const correctAnswerQ4 = document.querySelector('label[for="q4b"]');
  
             
             correctAnswerQ1.classList.add("correct-answer");
             correctAnswerQ2.classList.add("correct-answer");
             correctAnswerQ3.classList.add("correct-answer");
+            correctAnswerQ4.classList.add("correct-answer");
 
             // Hide both retry and show answers link
             document.getElementById("showAnswers").style.display = "none";
