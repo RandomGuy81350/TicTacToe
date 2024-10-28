@@ -1,22 +1,152 @@
-<html> 
-    <head> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title> Answer to Box Question </title></head>
-    <body>
-        
-           <h2> <u> Answer to box Question:</u> </h2> <br>
-           <p> <b>
-                You see there are 3 boxes with the three labels mentioned in question.
-                <br> All the labels are placed incorrectly.
-                <br> You should choose to pick a fruit from the box with label 'both apples and oranges.'
-                <br> <mark> That's because since all the labels are placed incorrectly, this box also has incorrect label, </mark>
-                <br> which means it can be one with only apples or only oranges. 
-                <br> Now, if you get an apple after picking up a fruit from the box, this box is definitely the one
-                <br> with only apples.
-                <br>  <mark> Now you are left with two boxes which has label 'only oranges' and 'only apples'. </mark>
-                <br> One of them contains only oranges and the other contains both apples and oranges.
-                <br> Since all the labels are placed incorrectly, the one with label 'only oranges' does not have only oranges.
-                <br> That means <mark>the box with label 'only oranges' has both oranges and apples, and the one with label 
-                <br> 'only apples' has only oranges.</mark>
-            </b>
-        </p>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .retry, .show-answers {
+            margin-top: 10px;
+            color: blue;
+            cursor: pointer;
+            display: inline;
+        }
+        .retry:hover, .show-answers:hover {
+            text-decoration: underline;
+        }
+        .correct-answer {
+            background-color: #d4edda;
+            font-weight: bold;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h2>MCQ Questions</h2>
+
+    <!-- Question 1 -->
+    <div class="question">
+        <p>Q1. If ΔABC~∆PQR then which of the following statement is false?</p>
+        <input type="radio" id="q1a" name="q1" value="A">
+        <label for="q1a">A. AB/BC = PQ/QR.</label><br>
+        <input type="radio" id="q1b" name="q1" value="B">
+        <label for="q1b">B. AB/BC = PR/PQ.</label><br>
+        <input type="radio" id="q1c" name="q1" value="C">
+        <label for="q1c">C. AC/AB = PR/PQ.</label><br>
+        <input type="radio" id="q1d" name="q1" value="D">
+        <label for="q1d">D. AB/PQ = BC/QR.</label><br>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question">
+        <p>Q2. p(q) = 3q^⁽²ⁿ-¹⁾ + 1 is a quadratic polynomial. n=?</p>
+        <input type="radio" id="q2a" name="q2" value="A">
+        <label for="q2a">A. 2</label><br>
+        <input type="radio" id="q2b" name="q2" value="B">
+        <label for="q2b">B. 3/4</label><br>
+        <input type="radio" id="q2c" name="q2" value="C">
+        <label for="q2c">C. 3/2</label><br>
+        <input type="radio" id="q2d" name="q2" value="D">
+        <label for="q2d">D. 1/2</label><br>
+    </div>
+     <!-- Question 3 -->
+     
+     <div class="question">
+     <p> Q3. Every natural number has two sqaure roots. </p>
+     <input type="radio" id="q3a" name="q3" value="A">
+        <label for="q3a">A. True</label><br>
+        <input type="radio" id="q3b" name="q3" value="B">
+        <label for="q3b">B. False</label><br>
+     </div>
+
+    <!-- Submit button and result display -->
+    <button id="submitBtn" onclick="checkAnswers()">Submit</button>
+    <p class="result" id="result"></p>
+    <span class="retry" id="retry" onclick="resetQuiz()" style="display:none;">Retry-></span>
+    <span class="show-answers" id="showAnswers" onclick="showCorrectAnswers()" style="display:none;">Show Answers</span>
+
+<br> <br> <br><br>
+<h3> <i> Created by Mrigesh </i> </h3>
+ <p> Ask me personally if you have a doubt. </p>
+ <br>
+    <script>
+        function checkAnswers() {
+            // Correct answers for each question
+            const correctAnswers = {
+                q1: "B", // Correct answer for Question 1
+                q2: "C",
+                q3: "A"  // Correct answer for Question 2
+            };
+
+            // Retrieve user's answers and calculate the score
+            let score = 0;
+            const userAnswerQ1 = document.querySelector('input[name="q1"]:checked');
+            const userAnswerQ2 = document.querySelector('input[name="q2"]:checked');
+            const userAnswerQ3 = document.querySelector('input[name="q3"]:checked');
+
+            if (userAnswerQ1 && userAnswerQ1.value === correctAnswers.q1) {
+                score++;
+            }
+            if (userAnswerQ2 && userAnswerQ2.value === correctAnswers.q2) {
+                score++;
+            }
+            if (userAnswerQ3 && userAnswerQ3.value === correctAnswers.q3) {
+                score++;
+            }
+
+            // Display result
+            document.getElementById("result").innerText = `You got ${score} out of 3 correct.`;
+
+            // Hide submit button and show retry and show answers links
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("retry").style.display = "inline";
+            document.getElementById("showAnswers").style.display = "inline";
+        }
+
+        function resetQuiz() {
+            // Clear the result text
+            document.getElementById("result").innerText = "";
+
+            // Uncheck all radio buttons
+            const radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => radio.checked = false);
+
+            // Remove highlight from correct answers
+            const labels = document.querySelectorAll('label');
+            labels.forEach(label => label.classList.remove("correct-answer"));
+
+            // Show submit button and hide retry and show answers links
+            document.getElementById("submitBtn").style.display = "inline";
+            document.getElementById("retry").style.display = "none";
+            document.getElementById("showAnswers").style.display = "none";
+        }
+
+        function showCorrectAnswers() {
+            // Highlight the correct answers for each question
+            const correctAnswerQ1 = document.querySelector('label[for="q1b"]');
+            const correctAnswerQ2 = document.querySelector('label[for="q2c"]');
+            const correctAnswerQ3 = document.querySelector('label[for="q3a"]');
+ 
+            
+            correctAnswerQ1.classList.add("correct-answer");
+            correctAnswerQ2.classList.add("correct-answer");
+            correctAnswerQ3.classList.add("correct-answer");
+
+            // Hide both retry and show answers link
+            document.getElementById("showAnswers").style.display = "none";
+        }
+    </script>
+</body>
 </html>
