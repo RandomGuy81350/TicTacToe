@@ -107,6 +107,18 @@
         <input type="radio" id="q6d" name="q6" value="D">
         <label for="q6d">D. 3/2.</label><br>
     </div>
+    <!-- Question 7 -->
+    <div class="question">
+        <p>Q7. Read the image given below and choose the correct option.</p>
+        <input type="radio" id="q7a" name="q7" value="A">
+        <label for="q7a">A. ∠ATQ=58°.</label><br>
+        <input type="radio" id="q7b" name="q7" value="B">
+        <label for="q7b">B. ∠ATQ=29°.</label><br>
+        <input type="radio" id="q7c" name="q7" value="C">
+        <label for="q7c">C. ∠ATQ=61°.</label><br>
+        <input type="radio" id="q7d" name="q7" value="D">
+        <label for="q7d">D.∠ATQ=119°.</label><br>
+    </div>
 
     <!-- Submit button and result display -->
     <button id="submitBtn" onclick="checkAnswers()">Submit</button>
@@ -127,7 +139,8 @@
                 q3: "A",
                 q4: "B",
                 q5: "A",
-                q6: "C"// Correct answer for Question 2
+                q6: "C",
+                q7: "C"// Correct answer for Question 2
             };
 
             // Retrieve user's answers and calculate the score
@@ -138,6 +151,8 @@
             const userAnswerQ4 = document.querySelector('input[name="q4"]:checked');
             const userAnswerQ5 = document.querySelector('input[name="q5"]:checked');
             const userAnswerQ6 = document.querySelector('input[name="q6"]:checked');
+            const userAnswerQ7 = document.querySelector('input[name="q6"]:checked');
+            
 
             if (userAnswerQ1 && userAnswerQ1.value === correctAnswers.q1) {
                 score++;
@@ -157,9 +172,12 @@
             if (userAnswerQ6 && userAnswerQ6.value === correctAnswers.q6) {
                 score++;
             }
+            if (userAnswerQ7 && userAnswerQ7.value === correctAnswers.q7) {
+                score++;
+            }
 
             // Display result
-            document.getElementById("result").innerText = `You got ${score} out of 6 correct.`;
+            document.getElementById("result").innerText = `You got ${score} out of 7 correct.`;
 
             // Hide submit button and show retry and show answers links
             document.getElementById("submitBtn").style.display = "none";
@@ -193,6 +211,7 @@
             const correctAnswerQ4 = document.querySelector('label[for="q4b"]');
             const correctAnswerQ5 = document.querySelector('label[for="q5a"]');
             const correctAnswerQ6 = document.querySelector('label[for="q6c"]');
+            const correctAnswerQ7 = document.querySelector('label[for="q7c"]');
             
             correctAnswerQ1.classList.add("correct-answer");
             correctAnswerQ2.classList.add("correct-answer");
@@ -200,6 +219,7 @@
             correctAnswerQ4.classList.add("correct-answer");
             correctAnswerQ5.classList.add("correct-answer");
             correctAnswerQ6.classList.add("correct-answer");
+            correctAnswerQ7.classList.add("correct-answer");
 
             // Hide both retry and show answers link
             document.getElementById("showAnswers").style.display = "none";
