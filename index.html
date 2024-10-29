@@ -82,6 +82,18 @@
         <input type="radio" id="q4d" name="q4" value="D">
         <label for="q4d">D. 90°.</label><br>
     </div>
+    <!-- Question 5 -->
+    <div class="question">
+        <p> In the figure given below, ∆AED and ∆ABC are two <br>right-angled traingles right angled at E and D respectively where <br> AC=5cm, <br> CD=2.5cm, <br> ∠ADE=60°. <br> DE=?</p>
+        <input type="radio" id="q5a" name="q5" value="A">
+        <label for="q5a">A. 1.25cm.</label><br>
+        <input type="radio" id="q5b" name="q5" value="B">
+        <label for="q5b">B. 2.5cm.</label><br>
+        <input type="radio" id="q5c" name="q5" value="C">
+        <label for="q5c">C. 2.25cm.</label><br>
+        <input type="radio" id="q5d" name="q5" value="D">
+        <label for="q5d">D. 3cm.</label><br>
+    </div>
 
     <!-- Submit button and result display -->
     <button id="submitBtn" onclick="checkAnswers()">Submit</button>
@@ -100,7 +112,8 @@
                 q1: "B", // Correct answer for Question 1
                 q2: "C",
                 q3: "A",
-                q4: "B"// Correct answer for Question 2
+                q4: "B",
+                q5: "A"// Correct answer for Question 2
             };
 
             // Retrieve user's answers and calculate the score
@@ -109,6 +122,7 @@
             const userAnswerQ2 = document.querySelector('input[name="q2"]:checked');
             const userAnswerQ3 = document.querySelector('input[name="q3"]:checked');
             const userAnswerQ4 = document.querySelector('input[name="q4"]:checked');
+            const userAnswerQ5 = document.querySelector('input[name="q5"]:checked');
 
             if (userAnswerQ1 && userAnswerQ1.value === correctAnswers.q1) {
                 score++;
@@ -120,6 +134,9 @@
                 score++;
             }
             if (userAnswerQ4 && userAnswerQ4.value === correctAnswers.q4) {
+                score++;
+            }
+            if (userAnswerQ5 && userAnswerQ5.value === correctAnswers.q5) {
                 score++;
             }
 
@@ -156,12 +173,13 @@
             const correctAnswerQ2 = document.querySelector('label[for="q2c"]');
             const correctAnswerQ3 = document.querySelector('label[for="q3a"]');
             const correctAnswerQ4 = document.querySelector('label[for="q4b"]');
- 
+            const correctAnswerQ5 = document.querySelector('label[for="q5a"]');
             
             correctAnswerQ1.classList.add("correct-answer");
             correctAnswerQ2.classList.add("correct-answer");
             correctAnswerQ3.classList.add("correct-answer");
             correctAnswerQ4.classList.add("correct-answer");
+            correctAnswerQ5.classList.add("correct-answer");
 
             // Hide both retry and show answers link
             document.getElementById("showAnswers").style.display = "none";
