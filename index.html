@@ -120,6 +120,18 @@
         <input type="radio" id="q7d" name="q7" value="D">
         <label for="q7d">D.∠ATQ=119°.</label><br>
     </div>
+    <!-- Question 8 -->
+    <div class="question">
+        <p>Q8. It is given that in a group of 3 students, the probability of 2 students not having the same birthday is 0.992. What is the probability that the 2 students have the same birthday? (NCERT)</p>
+        <input type="radio" id="q8a" name="q8" value="A">
+        <label for="q8a">A. 0.008.</label><br>
+        <input type="radio" id="q8b" name="q8" value="B">
+        <label for="q8b">B. 0.118.</label><br>
+        <input type="radio" id="q8c" name="q8" value="C">
+        <label for="q8c">C. 0.992.</label><br>
+        <input type="radio" id="q8d" name="q8" value="D">
+        <label for="q8d">D. None of these.</label><br>
+    </div>
 
     <!-- Submit button and result display -->
     <button id="submitBtn" onclick="checkAnswers()">Submit</button>
@@ -141,7 +153,8 @@
                 q4: "B",
                 q5: "A",
                 q6: "C",
-                q7: "C"// Correct answer for Question 2
+                q7: "C",
+                q8: "A"// Correct answer for Question 2
             };
 
             // Retrieve user's answers and calculate the score
@@ -153,6 +166,7 @@
             const userAnswerQ5 = document.querySelector('input[name="q5"]:checked');
             const userAnswerQ6 = document.querySelector('input[name="q6"]:checked');
             const userAnswerQ7 = document.querySelector('input[name="q7"]:checked');
+            const userAnswerQ8 = document.querySelector('input[name="q8"]:checked');
             
 
             if (userAnswerQ1 && userAnswerQ1.value === correctAnswers.q1) {
@@ -176,9 +190,12 @@
             if (userAnswerQ7 && userAnswerQ7.value === correctAnswers.q7) {
                 score++;
             }
+            if (userAnswerQ8 && userAnswerQ8.value === correctAnswers.q8) {
+                score++;
+            }
 
             // Display result
-            document.getElementById("result").innerText = `You got ${score} out of 7 correct.`;
+            document.getElementById("result").innerText = `You got ${score} out of 8 correct.`;
 
             // Hide submit button and show retry and show answers links
             document.getElementById("submitBtn").style.display = "none";
@@ -213,7 +230,8 @@
             const correctAnswerQ5 = document.querySelector('label[for="q5a"]');
             const correctAnswerQ6 = document.querySelector('label[for="q6c"]');
             const correctAnswerQ7 = document.querySelector('label[for="q7c"]');
-            
+            const correctAnswerQ8 = document.querySelector('label[for="q8a"]');
+
             correctAnswerQ1.classList.add("correct-answer");
             correctAnswerQ2.classList.add("correct-answer");
             correctAnswerQ3.classList.add("correct-answer");
@@ -221,6 +239,7 @@
             correctAnswerQ5.classList.add("correct-answer");
             correctAnswerQ6.classList.add("correct-answer");
             correctAnswerQ7.classList.add("correct-answer");
+            correctAnswerQ8.classList.add("correct-answer");
 
             // Hide both retry and show answers link
             document.getElementById("showAnswers").style.display = "none";
